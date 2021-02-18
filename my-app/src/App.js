@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.css';
 import Header from './Header';
+import Counter from './Counter';
 
 function App() {
   return (
-    <Header name="Gustavo Teixeira" links={["Sobre", "Setup", "Tech"]}></Header>
+    <div>
+      <Header name="Gustavo Teixeira" links={["Sobre", "Setup", "Tech"]}></Header>
+      <Counter></Counter>
+    </div>
   );
 }
 
