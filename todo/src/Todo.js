@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import List from './components/List';
 import TodoForm from './components/TodoForm';
 import Item from './components/Item';
 import './Todo.css';
 
+const SAVED_ITEMS = "savedItems";
+
 function Todo() {
 
     const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        let savedItems = JSON.parse(localStorage.getItem(SAVED_ITEMS));
+        if (savedItems) {
+            setItems(savedItems);
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem(SAVED_ITEMS, JSON.stringify(items));
+    }, [items])
 
     function onAddItem(text) {
         let it = new Item(text);
@@ -19,8 +32,8 @@ function Todo() {
     }
 
     function onDone(item) {
-        let updatedItems = items.map(it=>{
-            if(it.id === item.id) {
+        let updatedItems = items.map(it => {
+            if (it.id === item.id) {
                 it.done = !it.done;
             }
             return it;
